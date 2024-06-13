@@ -21,7 +21,7 @@ def tambah_uang_pertama_kali():
 
 # Fungsi untuk menambahkan transaksi
 def tambah_transaksi():
-    tanggal = datetime.now()
+    tanggal = datetime.now() #mengambil waktu saat ini / realtime
     print("Pilih jenis transaksi:")
     print("1. Pemasukan")
     print("2. Pengeluaran")
@@ -43,7 +43,7 @@ def tambah_transaksi():
         'tanggal': tanggal,
         'jenis uang': uang,
         'nominal': nominal,
-        'jenis transaksi': kategori,
+        'kategori': kategori,
         'deskripsi': deskripsi
     }
     transactions.append(transaksi)
@@ -153,11 +153,12 @@ def lihat_saldo():
     df = pd.read_csv('uang.csv')
     table = tabulate(df, headers='keys', tablefmt='pretty')
     print(table)
+
 # Fungsi untuk menyimpan transaksi ke file CSV
 def simpan_transaksi(transaksi):
     filename = "mutasi.csv"
     with open(filename, 'a', newline='') as csvfile:
-        fieldnames = ['tanggal', 'jenis uang', 'nominal', 'jenis transaksi', 'deskripsi']
+        fieldnames = ['tanggal', 'jenis uang', 'nominal', 'kategori', 'deskripsi']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
 
         # Menulis header hanya jika file masih kosong
@@ -166,10 +167,66 @@ def simpan_transaksi(transaksi):
 
         writer.writerow(transaksi)
     print(f"Informasi transaksi telah disimpan ke file '{filename}'.")
+
 def mutasi():
+    print("Melihat berdasarkan : ")
+    print("1. Kategori Transaksi")
+    print("2. Jenis Uang")
+    print("3. Tanggal")
+    print("4. Semuanya")
+    sort = int(input("Pilih (1/4) : "))
+    
+    if sort == 1:
+        sort_jenistransaksi()
+    elif sort == 2:
+        sort_jenisuang()
+    elif sort == 3:
+        sort_tanggal()
+    elif sort == 4:
+        sort_all()
+    else:
+        print ("Input Tidak valid !")
+
+# filter mutasi
+def sort_jenistransaksi():
+    df = pd.read_csv('mutasi.csv')
+    print("Kolom yang tersedia:", df.columns.tolist())  # Debug: cek kolom yang tersedia
+    pemasukan = df[df['kategori'] == 'Pemasukan']
+    pengeluaran = df[df['kategori'] == 'Pengeluaran']
+    pemindahan = df[df['kategori'] == 'Pemindahan']
+    table_pemasukan = tabulate(pemasukan, headers='keys', tablefmt='pretty')
+    table_pengeluaran = tabulate(pengeluaran, headers='keys', tablefmt='pretty')
+    table_pemindahan = tabulate(pemindahan, headers='keys', tablefmt='pretty')
+    print("\n============== PEMASUKAN ==============")
+    print(table_pemasukan)
+    print("\n============== PENGELUARAN ==============")
+    print(table_pengeluaran)
+    print("\n============== PEMINDAHAN ==============")
+    print(table_pemindahan)
+
+def sort_jenisuang():
+    df = pd.read_csv('mutasi.csv')
+    cash = df[df['jenis uang'] == 'cash']
+    cashless = df[df['jenis uang'] == 'cashless']
+    table_cash = tabulate(cash, headers='keys', tablefmt='pretty')
+    table_cashless = tabulate(cashless, headers='keys', tablefmt='pretty')
+    print("\n============== CASH ==============")
+    print(table_cash)
+    print("\n============== CASHLESS ==============")
+    print(table_cashless)
+
+def sort_tanggal():
+    df = pd.read_csv('mutasi.csv')
+    df['tanggal'] = pd.to_datetime(df['tanggal'])  # Pastikan kolom 'tanggal' dalam format datetime
+    df = df.sort_values(by='tanggal')
+    table = tabulate(df, headers='keys', tablefmt='pretty')
+    print(table)
+
+def sort_all():
     df = pd.read_csv('mutasi.csv')
     table = tabulate(df, headers='keys', tablefmt='pretty')
     print(table)
+
 # Fungsi utama
 def utama():
     if not cek_file_ada():
@@ -181,16 +238,15 @@ def utama():
         print("2. Lihat Saldo")
         print("3. Lihat Mutasi")
         print("0. Keluar")
-        choice = input("Masukkan pilihan (1/2/0): ")
+        pilihan = input("Masukkan pilihan (1/2/3/0): ")
         
-        if choice == '1':
+        if pilihan == '1':
             tambah_transaksi()
-        elif choice == '2':
+        elif pilihan == '2':
             lihat_saldo()
-        elif choice == '3':
+        elif pilihan == '3':
             mutasi()
-        elif choice == '0':
-            print("Terima kasih. Sampai jumpa!")
+        elif pilihan == '0':
             break
         else:
             print("Pilihan tidak valid. Silakan coba lagi.")
