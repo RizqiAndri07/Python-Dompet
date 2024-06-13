@@ -216,10 +216,15 @@ def sort_jenisuang():
     print(table_cashless)
 
 def sort_tanggal():
+    tahun = int(input("masukkan tahun : "))
+    bulan = int(input("masukkan bulan : "))
     df = pd.read_csv('mutasi.csv')
-    df['tanggal'] = pd.to_datetime(df['tanggal'])  # Pastikan kolom 'tanggal' dalam format datetime
-    df = df.sort_values(by='tanggal')
-    table = tabulate(df, headers='keys', tablefmt='pretty')
+    df['tanggal'] = pd.to_datetime(df['tanggal'])  # Konversi kolom 'tanggal' ke datetime
+    
+    # Filter untuk transaksi pada Mei 2024
+    df_tanggal = df[(df['tanggal'].dt.year == tahun) & (df['tanggal'].dt.month == bulan)]
+    
+    table = tabulate(df_tanggal, headers='keys', tablefmt='pretty')
     print(table)
 
 def sort_all():
