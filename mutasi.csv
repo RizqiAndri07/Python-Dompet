@@ -4,3 +4,8 @@ tanggal,uang,nominal,kategori,deskripsi
 2024-06-11 23:55:01.428546,cash,10000.0,Pemindahan,penukaran uang
 2024-06-11 23:56:30.611221,cashless,100000.0,Pemindahan,tarik uang
 2024-06-12 00:09:47.508965,cashless,10000.0,Pengeluaran,beli nasi
+2024-06-12 11:04:59.006975,cashless,200000.0,Pengeluaran,pondah
+2024-06-12 11:10:03.343368,cash,200000.0,Pemindahan,pindah
+2024-06-12 11:11:47.871138,cashless,50000.0,Pemindahan,pindah aja si
+2024-06-12 11:30:39.460843,cash,3000.0,Pengeluaran,beli esteh
+2024-06-12 11:31:38.959687,cash,21000.0,Pengeluaran,beli kuota 
