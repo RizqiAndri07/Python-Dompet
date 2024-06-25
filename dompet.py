@@ -1,10 +1,19 @@
+# Kelompok Dicont OS (3)
+# Anggota 
+# Raffael Aldrich Setiawan  (V3423070)
+# Raihan Kafi Hufayda       (V3423072)
+# Rizqi Andri Wijaya        (V3423077)
+# Satria Kusuma Mahardika   (V3423079)
+# Veri Tri Ariyanto         (V3423085) 
+
+# Judul aplikasi : DOMPETKU
+# sistem untuk mencatat transaksi uang cash dan cashless
+
+
 import pandas as pd
 from tabulate import tabulate
 import csv
 from datetime import datetime
-
-# Inisialisasi list transaksi
-transactions = []
 
 # Fungsi untuk menambahkan uang cash dan cashless pertama kali
 def tambah_uang_pertama_kali():
@@ -46,7 +55,6 @@ def tambah_transaksi():
         'kategori': kategori,
         'deskripsi': deskripsi
     }
-    transactions.append(transaksi)
     print(f"Transaksi telah ditambahkan.")
     simpan_transaksi(transaksi)
 
@@ -158,7 +166,7 @@ def lihat_saldo():
 def simpan_transaksi(transaksi):
     filename = "mutasi.csv"
     with open(filename, 'a', newline='') as csvfile:
-        fieldnames = ['tanggal', 'jenis uang', 'nominal', 'kategori', 'deskripsi']
+        fieldnames = ('tanggal', 'jenis uang', 'nominal', 'kategori', 'deskripsi')
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
 
         # Menulis header hanya jika file masih kosong
