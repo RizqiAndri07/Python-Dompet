@@ -65,10 +65,10 @@ def proses_pemasukan():
     print("2. Uang cashless")
     jenis_uang = input("Masukkan pilihan (1/2): ")
     if jenis_uang == '1':
-        nominal = tambah_pemasukan("cash")
+        nominal = input_pemasukan("cash")
         uang = "cash"
     elif jenis_uang == '2':
-        nominal = tambah_pemasukan("cashless")
+        nominal = input_pemasukan("cashless")
         uang = "cashless"
     else:
         print("Pilihan tidak valid.")
@@ -82,10 +82,10 @@ def proses_pengeluaran():
     print("2. Uang cashless")
     jenis_uang = input("Masukkan pilihan (1/2): ")
     if jenis_uang == '1':
-        nominal = tambah_pengeluaran("cash")
+        nominal = input_pengeluaran("cash")
         uang = "cash"
     elif jenis_uang == '2':
-        nominal = tambah_pengeluaran("cashless")
+        nominal = input_pengeluaran("cashless")
         uang = "cashless"
     else:
         print("Pilihan tidak valid.")
@@ -112,13 +112,13 @@ def proses_pemindahan():
     return "Pemindahan", dari, nominal
 
 # Fungsi untuk menambahkan pemasukan
-def tambah_pemasukan(jenis):
+def input_pemasukan(jenis):
     jumlah = float(input("Masukkan jumlah pemasukan: "))
     update_uang(jenis, jumlah)
     return jumlah
 
 # Fungsi untuk menambahkan pengeluaran
-def tambah_pengeluaran(jenis):
+def input_pengeluaran(jenis):
     jumlah = float(input("Masukkan jumlah pengeluaran: "))
     update_uang(jenis, -jumlah)
     return jumlah
