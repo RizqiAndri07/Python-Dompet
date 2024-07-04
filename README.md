@@ -1,1 +1,2 @@
-ini adalah projek UAS smt 2 mata kuliah Python berkelompok yang saya fork dari mas andriii.
+# Project UAS Praktik Pemrograman Python
+Sebuah sistem untuk mencatat transaksi uang cash dan cashless anda dan disimpan pada file .csv
